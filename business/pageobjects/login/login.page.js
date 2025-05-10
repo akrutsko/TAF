@@ -1,3 +1,4 @@
+const { clearInput } = require('../../../helpers/elements');
 const BasePage = require('../base.page');
 
 class LoginPage extends BasePage {
@@ -24,43 +25,16 @@ class LoginPage extends BasePage {
   }
 
   async clearUsername() {
-    await this.usernameInput.setValue('');
+    await clearInput(this.usernameInput);
   }
 
   async clearPassword() {
-    await this.passwordInput.setValue('');
+    await clearInput(this.passwordInput);
   }
 
   async clearCredentials() {
     await this.clearUsername();
     await this.clearPassword();
-    // await browser.execute(() => {
-    //   const input = document.querySelector('#user-name');
-    //   input.setAttribute('value', '');
-    //   input.value = '';
-    // });
-    // await browser.execute(() => {
-    //   const input = document.querySelector('#password');
-    //   input.setAttribute('value', '');
-    //   input.value = '';
-    // });
-
-    await this.clearInput(this.usernameInput);
-    await this.clearInput(this.passwordInput);
-  }
-
-  async clearInput(element) {
-    await element.waitForClickable({ timeout: 5000 });
-    // this.log.info(Clearing input field: ${await element.selector});
-
-    if (browser.capabilities.browserName === 'MicrosoftEdge' || browser.capabilities.browserName === 'chrome') {
-      const inputLength = (await element.getValue()).length;
-      for (let i = 0; i < inputLength; i++) {
-        await element.addValue('\uE003');
-      }
-    } else {
-      await element.clearValue();
-    }
   }
 
   async clickLoginBtn() {

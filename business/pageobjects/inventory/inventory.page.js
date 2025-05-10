@@ -1,5 +1,5 @@
 const BasePage = require('../base.page');
-const Header = require('../../components/header/header.component');
+const Header = require('../components/header/header.component');
 
 class InventoryPage extends BasePage {
   header = new Header();
